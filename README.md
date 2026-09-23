@@ -27,6 +27,8 @@ go install github.com/su-fu/cchooklint/cmd/cchooklint@latest
 
 Or download a prebuilt Windows binary from the [Releases page](https://github.com/su-fu/cchooklint/releases) — no Go installation required.
 
+> The `.exe` isn't code-signed, so Windows SmartScreen will show a "Windows protected your PC" warning on first run. This is expected for small unsigned open-source tools — click "More info" then "Run anyway" to proceed. To avoid the warning entirely, use `go install` instead, which builds the binary locally from source.
+
 ## Usage
 
 ```sh

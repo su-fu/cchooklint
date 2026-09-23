@@ -27,6 +27,8 @@ go install github.com/su-fu/cchooklint/cmd/cchooklint@latest
 
 或者从 [Releases 页面](https://github.com/su-fu/cchooklint/releases) 下载预编译的 Windows 二进制文件（无需安装 Go）。
 
+> 该 `.exe` 未经代码签名，因此首次运行时 Windows SmartScreen 会显示"Windows 已保护你的电脑"的警告。对于未签名的小型开源工具来说这是正常现象——点击"更多信息"然后选择"仍要运行"即可继续。如果想完全避免此警告，可以改用 `go install`，它会在本地从源码构建。
+
 ## 用法
 
 ```sh

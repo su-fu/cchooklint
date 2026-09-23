@@ -27,6 +27,8 @@ go install github.com/su-fu/cchooklint/cmd/cchooklint@latest
 
 または、[Releasesページ](https://github.com/su-fu/cchooklint/releases)からWindows向けビルド済みバイナリをダウンロードしてください（Goのインストールは不要です）。
 
+> この`.exe`はコード署名をしていないため、初回実行時にWindows SmartScreenが「Windows によって PC が保護されました」という警告を表示します。これは署名されていない小規模なOSSツールでは想定内の挙動です。「詳細情報」→「実行」で進められます。警告自体を避けたい場合は、ソースからローカルでビルドされる`go install`を使ってください。
+
 ## 使い方
 
 ```sh
