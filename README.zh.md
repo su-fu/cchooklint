@@ -25,7 +25,7 @@
 go install github.com/su-fu/cchooklint/cmd/cchooklint@latest
 ```
 
-（目前尚未发布正式版本，请暂时从源码构建。）
+或者从 [Releases 页面](https://github.com/su-fu/cchooklint/releases) 下载预编译的 Windows 二进制文件（无需安装 Go）。
 
 ## 用法
 

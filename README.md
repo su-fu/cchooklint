@@ -25,7 +25,7 @@ For the coverage check, if a hook's `command` invokes a local script file (e.g. 
 go install github.com/su-fu/cchooklint/cmd/cchooklint@latest
 ```
 
-(Not yet published to a versioned release — build from source for now.)
+Or download a prebuilt Windows binary from the [Releases page](https://github.com/su-fu/cchooklint/releases) — no Go installation required.
 
 ## Usage
 

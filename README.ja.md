@@ -25,7 +25,7 @@ Windows上のClaude Codeは、シェルコマンドを「Bashツール（Git Bas
 go install github.com/su-fu/cchooklint/cmd/cchooklint@latest
 ```
 
-（まだバージョン管理されたリリースは公開していません。現時点ではソースからビルドしてください。）
+または、[Releasesページ](https://github.com/su-fu/cchooklint/releases)からWindows向けビルド済みバイナリをダウンロードしてください（Goのインストールは不要です）。
 
 ## 使い方
 
