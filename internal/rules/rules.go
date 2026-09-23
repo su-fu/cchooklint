@@ -1,6 +1,7 @@
 package rules
 
 import (
+	"os"
 	"strings"
 
 	"github.com/su-fu/cchooklint/internal/i18n"
@@ -97,7 +98,14 @@ func (r CoverageRule) Check(entries []model.HookEntry) []Finding {
 		if !isSingleToolMatcher(entry.Matcher) {
 			continue
 		}
-		if !containsDangerKeyword(entry.Command) {
+		dangerous := containsDangerKeyword(entry.Command)
+		if !dangerous && entry.ScriptPath != "" {
+			contents, err := os.ReadFile(entry.ScriptPath)
+			if err == nil {
+				dangerous = containsDangerKeyword(string(contents))
+			}
+		}
+		if !dangerous {
 			continue
 		}
 		result = append(result, Finding{Severity: "WARN", Code: CodeCoverageGap, SourceFile: entry.SourceFile, Event: entry.Event, MessageID: i18n.MsgCoverageWarning, Args: []any{entry.Matcher, "Bash|PowerShell"}})

@@ -16,6 +16,7 @@ func TestRules(t *testing.T) {
 		{"typo", "../../testdata/typo.json", TypoRule{}, 1},
 		{"coverage_gap", "../../testdata/coverage_gap.json", CoverageRule{}, 1},
 		{"clean", "../../testdata/clean.json", CoverageRule{}, 0},
+		{"coverage_gap_script", "../../testdata/coverage_gap_script.json", CoverageRule{}, 1},
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {

@@ -25,6 +25,7 @@ type HookEntry struct {
 	Event      string
 	Matcher    string
 	Command    string
+	ScriptPath string
 }
 
 func Load(path string) (Settings, error) {
@@ -49,7 +50,7 @@ func Flatten(sourceFile string, s Settings) []HookEntry {
 	for event, groups := range s.Hooks {
 		for _, group := range groups {
 			for _, cmd := range group.Hooks {
-				result = append(result, HookEntry{SourceFile: sourceFile, Event: event, Matcher: group.Matcher, Command: cmd.Command})
+				result = append(result, HookEntry{SourceFile: sourceFile, Event: event, Matcher: group.Matcher, Command: cmd.Command, ScriptPath: ResolveScriptPath(cmd.Command)})
 			}
 		}
 	}
@@ -94,4 +95,24 @@ func EditDistance(a, b string) int {
 	}
 
 	return table[m][n]
+}
+
+func looksLikeScriptPath(token string) bool {
+	var suffix = []string{".py", ".sh", ".ps1", ".js", ".rb"}
+	for _, s := range suffix {
+		if strings.HasSuffix(token, s) && strings.ContainsAny(token, "/\\") {
+			return true
+		}
+	}
+	return false
+}
+
+func ResolveScriptPath(command string) string {
+	tokens := strings.Fields(command)
+	for _, token := range tokens {
+		if looksLikeScriptPath(token) {
+			return token
+		}
+	}
+	return ""
 }

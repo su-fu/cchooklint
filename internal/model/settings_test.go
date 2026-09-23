@@ -46,9 +46,9 @@ func TestFlattenExpandsMatcherGroupsAndCommands(t *testing.T) {
 	got := Flatten("project/settings.json", settings)
 	sort.Slice(got, func(i, j int) bool { return got[i].Command < got[j].Command })
 	want := []HookEntry{
-		{SourceFile: "project/settings.json", Event: "PreToolUse", Matcher: "Bash", Command: "./first.sh"},
-		{SourceFile: "project/settings.json", Event: "PreToolUse", Matcher: "Bash", Command: "./second.sh"},
-		{SourceFile: "project/settings.json", Event: "PreToolUse", Matcher: "PowerShell", Command: "./third.ps1"},
+		{SourceFile: "project/settings.json", Event: "PreToolUse", Matcher: "Bash", Command: "./first.sh", ScriptPath: "./first.sh"},
+		{SourceFile: "project/settings.json", Event: "PreToolUse", Matcher: "Bash", Command: "./second.sh", ScriptPath: "./second.sh"},
+		{SourceFile: "project/settings.json", Event: "PreToolUse", Matcher: "PowerShell", Command: "./third.ps1", ScriptPath: "./third.ps1"},
 	}
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("Flatten() = %#v, want %#v", got, want)
@@ -106,5 +106,19 @@ func TestEditDistance(t *testing.T) {
 				t.Errorf("EditDistance(%q, %q) = %d, want %d", tt.a, tt.b, got, tt.want)
 			}
 		})
+	}
+}
+
+func TestResolveScriptPath(t *testing.T) {
+	tests := map[string]string{
+		"python .claude/hooks/guard.py": ".claude/hooks/guard.py",
+		"echo hi":                       "",
+		"rm -rf /tmp/cache":             "",
+		"echo hello.py":                 "",
+	}
+	for input, want := range tests {
+		if got := ResolveScriptPath(input); got != want {
+			t.Errorf("ResolveScriptPath(%q) = %q, want %q", input, got, want)
+		}
 	}
 }

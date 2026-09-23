@@ -17,6 +17,8 @@ This is especially dangerous for safety-guard hooks (e.g. ones that block danger
 
 `cchooklint` is read-only: it never modifies your settings files and never triggers hooks to test them at runtime. It only checks the specific `Bash`/`PowerShell` gap described above — it is not a general-purpose tool-name checker.
 
+For the coverage check, if a hook's `command` invokes a local script file (e.g. `python .claude/hooks/guard.py`), `cchooklint` also looks inside that script for the same danger signals, since the hook's actual logic often lives there rather than in the inline command string. If the script can't be found or read, it falls back to checking just the command string.
+
 ## Install
 
 ```sh

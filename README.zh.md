@@ -17,6 +17,8 @@
 
 `cchooklint` 是只读的：它不会修改你的配置文件，也不会在运行时实际触发 hook 进行测试。它只检查上述特定的 `Bash`/`PowerShell` 漏洞，并非通用的工具名检查工具。
 
+对于覆盖面检查，如果 hook 的 `command` 调用了本地脚本文件（例如 `python .claude/hooks/guard.py`），`cchooklint` 也会检查该脚本内部是否存在相同的危险信号，因为 hook 的实际逻辑通常写在脚本里，而不是内联的 command 字符串中。如果脚本无法找到或读取，会回退为仅检查 command 字符串。
+
 ## 安装
 
 ```sh
